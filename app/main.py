@@ -58,8 +58,9 @@ class Dictionary:
         return self.size
 
     def clear(self) -> None:
-        for i in range(self.capacity):
-            self.table[i] = None
+        for i in range(len(self.table)):
+            if self.table[i] is not None:
+                self.table[i] = None
         self.size = 0
 
     def __delitem__(self, key: Any) -> None:
