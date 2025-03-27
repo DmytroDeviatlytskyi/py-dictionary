@@ -52,14 +52,14 @@ class Dictionary:
             for node in self.table[index]:
                 if node.key == key:
                     return node.value
-        raise KeyError(f"Key {key} not found.")
+        raise KeyError(f"Can not get item by this key. Key {key} not found.")
 
     def __len__(self) -> int:
         return self.size
 
     def clear(self) -> None:
-        self.capacity = 8
-        self.table = [None] * self.capacity
+        for i in range(self.capacity):
+            self.table[i] = None
         self.size = 0
 
     def __delitem__(self, key: Any) -> None:
@@ -73,7 +73,7 @@ class Dictionary:
                     if not bucket:
                         self.table[index] = None
                     return
-        raise KeyError(f"Key {key} not found")
+        raise KeyError(f"Can not delete item by this key. Key {key} not found")
 
     def get(self, key: Any, default: Any = None) -> Any:
         index = hash(key) % self.capacity
@@ -98,7 +98,7 @@ class Dictionary:
                     return item
         if default is not None:
             return default
-        raise KeyError(f"Key {key} not found")
+        raise KeyError(f"Can not pop item by this key. Key {key} not found")
 
     def update(self, other_dict: Any) -> None:
         if isinstance(other_dict, dict):
